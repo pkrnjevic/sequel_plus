@@ -90,9 +90,7 @@ namespace :sq do
     desc "loads the schema from db/schema.rb"
     task :load => :load_config do
       eval(File.read(File.join(SEQUEL_PLUS_APP_ROOT, 'db', 'schema.rb'))).apply(DB, :up)
-      latest_version = ::Sequel::Migrator.latest_migration_version(File.join(SEQUEL_PLUS_APP_ROOT, 'db', 'migrate'))
-      ::Sequel::Migrator.set_current_migration_version(DB, latest_version)
-      puts "Database schema loaded version #{latest_version}"
+      puts "Database schema loaded from db/schema.rb"
     end
     
     desc "Returns current schema version"
